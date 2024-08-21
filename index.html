@@ -103,8 +103,8 @@
 
         .heart {
             position: absolute;
-            width: 90px;
-            height: 70px;
+            width: 100px;
+            height: 90px;
             background: url('https://i.imgur.com/DflBtLd.png') no-repeat center center;
             background-size: cover;
             opacity: 0;
@@ -139,6 +139,12 @@
                 height: 15px;
             }
         }
+
+        iframe {
+            position: absolute;
+            top: -9999px; /* Move o iframe para fora da tela */
+            left: -9999px;
+        }
     </style>
 </head>
 <body>
@@ -156,6 +162,8 @@
     <div class="additional-message">
         Para você se lembrar de quantos dias se passaram desde a minha melhor decisão... e que possamos voltar aqui e ver que os dias só aumentam. Eu te amo e tome banho
     </div>
+
+    <iframe src="https://www.youtube.com/embed/Fwc_qSKZSxs?autoplay=1&loop=1&playlist=Fwc_qSKZSxs" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
     <script>
         const startDate = new Date("2023-07-22T20:00:00");
