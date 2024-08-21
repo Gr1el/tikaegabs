@@ -13,7 +13,7 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #001f3f; /* Azul escuro */
+            background-color: #001f3f;
             color: #fff;
             font-family: 'Arial', sans-serif;
             position: relative;
@@ -21,12 +21,15 @@
 
         .slideshow-container {
             position: relative;
-            width: 100vw;
-            height: 60vh;
+            width: 55vw; /* Ajuste o tamanho conforme necessário */
+            height: 65vh; /* Ajuste o tamanho conforme necessário */
             overflow: hidden;
-            border: 2px solid #fff; /* Borda ao redor do slideshow */
-            border-radius: 10px; /* Cantos arredondados */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Sombra para destaque */
+            border: 2px solid #000000; /* Borda branca */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            padding: 10px; /* Adiciona um espaçamento interno */
+            box-sizing: border-box; /* Inclui padding e border no tamanho total */
+            margin-bottom: 20px; /* Espaço abaixo do slideshow para o texto */
         }
 
         .slideshow-container img {
@@ -44,90 +47,93 @@
         }
 
         @keyframes colorChange {
-            0% { color: rgb(255, 0, 0); } /* Vermelho */
-            50% { color: rgb(0, 0, 0); } /* Preto */
-            100% { color: rgb(255, 0, 0); } /* Vermelho */
+            0% { color: rgb(255, 0, 0); }
+            50% { color: rgb(0, 0, 0); }
+            100% { color: rgb(255, 0, 0); }
         }
 
-        @keyframes heartFall {
-            0% { transform: translateY(-100px); opacity: 1; }
-            100% { transform: translateY(100vh); opacity: 0; }
-        }
-
-        .datetime {
-            position: absolute;
-            top: 5px;
-            left: 5px;
-            z-index: 10;
-            text-align: center;
-            animation: colorChange 2s infinite; /* Animação de cor em 2 segundos */
+        .datetime-wrapper {
+            position: relative;
+            z-index: 20; /* Garantir que esteja acima da mensagem */
             font-size: 16px;
-            padding: 5px;
+            padding: 10px;
+            text-align: center;
+            color: #fff;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+            animation: colorChange 2s infinite;
+            margin-bottom: 20px; /* Espaço entre a datetime-wrapper e o separador */
         }
 
-        .years-months-days, .hours-minutes-seconds {
+        .years-months-days, .days-until-next-anniversary {
             font-size: 14px;
             font-weight: bold;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
             margin: 2px 0;
         }
 
-        .message {
-            position: absolute;
-            bottom: 100px; /* Ajustado para posicionar acima da frase adicional */
-            left: 50%;
-            transform: translateX(-50%);
+        .separator {
+            width: 50%;
+            height: 4px;
+            background: linear-gradient(to right, #ff6f61, #ff9a8b);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            border-radius: 2px;
+            margin: 20px 0; /* Espaço acima e abaixo do separador */
+        }
+
+        .falling-message {
             font-size: 20px;
             font-weight: bold;
-            animation: colorChange 2s infinite; /* Animação RGB em 2 segundos */
+            animation: colorChange 2s infinite;
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
-            z-index: 10;
+            z-index: 10; /* Abaixo da datetime-wrapper */
+            margin-bottom: 20px; /* Espaço abaixo da mensagem */
         }
 
         .additional-message {
-            position: absolute;
-            bottom: 10px; /* Posiciona a mensagem adicional bem embaixo da área do slideshow */
-            left: 50%;
-            transform: translateX(-50%);
             font-size: 14px;
             font-weight: normal;
             text-align: center;
-            animation: colorChange 2s infinite; /* Animação RGB em 2 segundos */
+            animation: colorChange 2s infinite;
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
             max-width: 90%;
             padding: 10px;
             box-sizing: border-box;
             z-index: 10;
-            color: #fff; /* Texto branco para contraste */
+            color: #fff;
         }
 
         .heart {
             position: absolute;
-            width: 100px;
-            height: 90px;
+            width: 50px;
+            height: 50px;
             background: url('https://i.imgur.com/DflBtLd.png') no-repeat center center;
             background-size: cover;
-            opacity: 0;
+            opacity: 0.8;
             z-index: 5;
+        }
+
+        @keyframes heartFall {
+            from {
+                transform: translateY(-100px);
+            }
+            to {
+                transform: translateY(100vh);
+            }
         }
 
         @media (max-width: 600px) {
             .slideshow-container {
-                height: 50vh;
+                width: 90vw; /* Ajuste o tamanho conforme necessário */
+                height: 50vh; /* Ajuste o tamanho conforme necessário */
             }
 
-            .datetime {
+            .datetime-wrapper {
                 font-size: 14px;
-                top: 2px;
-                left: 2px;
+                margin-bottom: 10px; /* Ajuste para visualização em dispositivos móveis */
             }
 
-            .years-months-days, .hours-minutes-seconds {
-                font-size: 12px;
-            }
-
-            .message {
+            .falling-message {
                 font-size: 18px;
+                margin-bottom: 15px;
             }
 
             .additional-message {
@@ -135,14 +141,14 @@
             }
 
             .heart {
-                width: 15px;
-                height: 15px;
+                width: 25px;
+                height: 25px;
             }
         }
 
         iframe {
             position: absolute;
-            top: -9999px; /* Move o iframe para fora da tela */
+            top: -9999px;
             left: -9999px;
         }
     </style>
@@ -152,31 +158,38 @@
         <img src="https://i.imgur.com/y6oaAKl.jpg" class="active">
         <img src="https://i.imgur.com/0wQamJI.jpg">
         <img src="https://i.imgur.com/lY0pGuy.png">
-        <div class="datetime" id="datetime">
-            <div class="years-months-days" id="date-part"></div>
-            <div class="hours-minutes-seconds" id="time-part"></div>
-        </div>
-        <div class="message">Eu te amo muito</div>
     </div>
 
+    <div class="datetime-wrapper">
+        <div class="years-months-days" id="date-part"></div>
+        <div class="days-until-next-anniversary" id="time-part"></div>
+    </div>
+
+    <div class="separator"></div> <!-- Linha horizontal separadora -->
+
+    <div class="falling-message">Eu te amo muito❤️</div>
+
+    <div class="separator"></div> <!-- Linha horizontal separadora -->
+
     <div class="additional-message">
-        Para você se lembrar de quantos dias se passaram desde a minha melhor decisão... e que possamos voltar aqui e ver que os dias só aumentam. Eu te amo e tome banho
+        Para você se lembrar de quantos dias se passaram desde a minha melhor decisão... e que possamos voltar aqui e ver que os dias só aumentam. Eu te amo e tome banho.
     </div>
 
     <iframe src="https://www.youtube.com/embed/Fwc_qSKZSxs?autoplay=1&loop=1&playlist=Fwc_qSKZSxs" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
     <script>
         const startDate = new Date("2023-07-22T20:00:00");
-        const updateInterval = 1000; // Atualizar a cada 1 segundo
+        const updateInterval = 1000;
 
         function updateDateTime() {
             const now = new Date();
             const timeDifference = now - startDate;
 
+            // Cálculo do tempo de relacionamento
             const years = now.getFullYear() - startDate.getFullYear();
             const months = now.getMonth() - startDate.getMonth();
             const days = now.getDate() - startDate.getDate();
-            
+
             let adjustedMonths = months;
             let adjustedYears = years;
             let adjustedDays = days;
@@ -185,22 +198,27 @@
                 const lastMonth = new Date(now.getFullYear(), now.getMonth() - 1, startDate.getDate());
                 adjustedDays = (now.getDate() + new Date(now - lastMonth).getDate()) - lastMonth.getDate();
                 adjustedMonths -= 1;
-            } 
+            }
 
             if (adjustedMonths < 0) {
                 adjustedMonths += 12;
                 adjustedYears -= 1;
             }
 
-            const seconds = Math.floor((timeDifference / 1000) % 60);
-            const minutes = Math.floor((timeDifference / (1000 * 60)) % 60);
-            const hours = Math.floor((timeDifference / (1000 * 60 * 60)) % 24);
+            // Cálculo do tempo restante até o próximo aniversário de namoro
+            let nextAnniversaryDate = new Date(now.getFullYear(), now.getMonth(), startDate.getDate(), startDate.getHours(), startDate.getMinutes(), startDate.getSeconds());
+            if (now > nextAnniversaryDate) {
+                nextAnniversaryDate.setMonth(nextAnniversaryDate.getMonth() + 1);
+            }
+
+            const timeUntilNextAnniversary = nextAnniversaryDate - now;
+            const remainingDays = Math.max(0, Math.ceil(timeUntilNextAnniversary / (1000 * 60 * 60 * 24)));
 
             document.getElementById('date-part').textContent = 
                 `Tempo de relacionamento: ${adjustedYears} anos, ${adjustedMonths} meses e ${adjustedDays} dias`;
-            
+
             document.getElementById('time-part').textContent = 
-                `${hours}h ${minutes}m ${seconds}s`;
+                `Faltam para Completar o Próximo Mês: ${remainingDays} dias`;
         }
 
         function showSlides() {
@@ -215,8 +233,8 @@
                 slides[slideIndex].style.display = 'block';
             }
 
-            nextSlide(); // Exibir o primeiro slide imediatamente
-            setInterval(nextSlide, 2000); // Mudar imagem a cada 2 segundos
+            nextSlide();
+            setInterval(nextSlide, 2000);
         }
 
         function createHeart() {
@@ -224,18 +242,18 @@
             heart.className = 'heart';
             heart.style.left = Math.random() * 100 + 'vw';
             heart.style.top = Math.random() * -100 + 'px';
-            heart.style.animation = `heartFall ${Math.random() * 3 + 2}s linear`;
+            heart.style.animation = `heartFall ${Math.random() * 5 + 3}s linear`;
             document.body.appendChild(heart);
 
             setTimeout(() => {
                 heart.remove();
-            }, 5000); // Remover coração após 5 segundos
+            }, 5000);
         }
 
         showSlides();
         updateDateTime();
-        setInterval(updateDateTime, updateInterval); // Atualizar o tempo decorrido a cada segundo
-        setInterval(createHeart, 1000); // Criar um coração a cada segundo
+        setInterval(updateDateTime, updateInterval);
+        setInterval(createHeart, 1000);
     </script>
 </body>
 </html>
