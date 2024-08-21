@@ -17,18 +17,16 @@
             color: #fff;
             font-family: 'Arial', sans-serif;
             position: relative;
-            text-align: center;
         }
 
         .slideshow-container {
             position: relative;
-            width: 90vw;
-            height: 50vh;
+            width: 100vw;
+            height: 60vh;
             overflow: hidden;
             border: 2px solid #fff; /* Borda ao redor do slideshow */
             border-radius: 10px; /* Cantos arredondados */
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Sombra para destaque */
-            margin-bottom: 20px; /* Espaço abaixo do slideshow */
         }
 
         .slideshow-container img {
@@ -57,28 +55,41 @@
         }
 
         .datetime {
+            position: absolute;
+            top: 5px;
+            left: 5px;
             z-index: 10;
             text-align: center;
             animation: colorChange 2s infinite; /* Animação de cor em 2 segundos */
+            font-size: 16px;
+            padding: 5px;
         }
 
         .years-months-days, .hours-minutes-seconds {
-            font-size: 20px;
+            font-size: 14px;
             font-weight: bold;
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
-            margin: 5px 0;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+            margin: 2px 0;
         }
 
         .message {
+            position: absolute;
+            bottom: 100px; /* Ajustado para posicionar acima da frase adicional */
+            left: 50%;
+            transform: translateX(-50%);
             font-size: 20px;
             font-weight: bold;
             animation: colorChange 2s infinite; /* Animação RGB em 2 segundos */
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
-            margin-bottom: 20px; /* Espaço abaixo da mensagem */
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+            z-index: 10;
         }
 
         .additional-message {
-            font-size: 16px;
+            position: absolute;
+            bottom: 10px; /* Posiciona a mensagem adicional bem embaixo da área do slideshow */
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 14px;
             font-weight: normal;
             text-align: center;
             animation: colorChange 2s infinite; /* Animação RGB em 2 segundos */
@@ -86,6 +97,7 @@
             max-width: 90%;
             padding: 10px;
             box-sizing: border-box;
+            z-index: 10;
             color: #fff; /* Texto branco para contraste */
         }
 
@@ -99,19 +111,19 @@
             z-index: 5;
         }
 
-        /* Responsividade */
         @media (max-width: 600px) {
             .slideshow-container {
-                width: 95vw;
-                height: 40vh;
+                height: 50vh;
             }
 
             .datetime {
-                font-size: 16px;
+                font-size: 14px;
+                top: 2px;
+                left: 2px;
             }
 
             .years-months-days, .hours-minutes-seconds {
-                font-size: 18px;
+                font-size: 12px;
             }
 
             .message {
@@ -119,8 +131,7 @@
             }
 
             .additional-message {
-                font-size: 14px;
-                padding: 8px;
+                font-size: 12px;
             }
 
             .heart {
@@ -143,7 +154,7 @@
     </div>
 
     <div class="additional-message">
-        Para você se lembrar de quantos dias se passaram desde a minha melhor decisão... e que a gente possa voltar aqui e ver que os dias só aumentaram. Eu te amo e tome banho.
+        Para você se lembrar de quantos dias se passaram desde a minha melhor decisão... e que possamos voltar aqui e ver que os dias só aumentam. Eu te amo e tome banho
     </div>
 
     <script>
