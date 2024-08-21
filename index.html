@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slideshow com Contagem de Tempo e Corações</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #333;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            position: relative;
+        }
+
+        .slideshow-container {
+            position: relative;
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        .slideshow-container img {
+            width: 100%;
+            height: auto;
+            border-radius: 15px;
+            display: none;
+        }
+
+        .active {
+            display: block;
+        }
+
+        .datetime {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        @keyframes fall {
+            0% {
+                top: -10%;
+                opacity: 1;
+            }
+            100% {
+                top: 110%;
+                opacity: 0;
+            }
+        }
+
+        .heart {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background-color: red;
+            transform: rotate(-45deg);
+            animation: fall 5s infinite;
+            opacity: 0;
+        }
+
+        .heart::before, .heart::after {
+            content: "";
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background-color: red;
+            border-radius: 50%;
+        }
+
+        .heart::before {
+            top: -15px;
+            left: 0;
+        }
+
+        .heart::after {
+            top: 0;
+            left: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="slideshow-container">
+        <img src="https://i.imgur.com/y6oaAKl.jpg" class="active">
+        <img src="https://i.imgur.com/0wQamJI.jpg">
+        <img src="https://i.imgur.com/lY0pGuy.png">
+        <div class="datetime" id="datetime"></div>
+    </div>
+
+    <script>
+        const startTime = new Date("2023-07-22T20:00:00");
+
+        function updateDateTime() {
+            const now = new Date();
+            const timeDifference = now - startTime;
+
+            const seconds = Math.floor((timeDifference / 1000) % 60);
+            const minutes = Math.floor((timeDifference / 1000 / 60) % 60);
+            const hours = Math.floor((timeDifference / (1000 * 60 * 60)) % 24);
+
+            const timeString = `${hours}h ${minutes}m ${seconds}s`;
+
+            document.getElementById('datetime').textContent = `22/07/2023 20:00:00 - Tempo decorrido: ${timeString}`;
+        }
+
+        function showSlides() {
+            let slideIndex = 0;
+            const slides = document.querySelectorAll('.slideshow-container img');
+
+            function nextSlide() {
+                slides[slideIndex].classList.remove('active');
+                slideIndex = (slideIndex + 1) % slides.length;
+                slides[slideIndex].classList.add('active');
+            }
+
+            setInterval(nextSlide, 2000); // Mudar imagem a cada 2 segundos
+        }
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 3 + 2 + 's';
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 5000); // Remover coração após 5 segundos
+        }
+
+        showSlides();
+        updateDateTime();
+        setInterval(updateDateTime, 1000); // Atualizar tempo decorrido a cada segundo
+        setInterval(createHeart, 1000); // Criar um coração a cada segundo
+    </script>
+</body>
+</html>
